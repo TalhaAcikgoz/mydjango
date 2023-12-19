@@ -1,30 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     I hope json showing
     <meta charset="UTF-8">
     <title>JSON Verileri Gösterme</title>
+    <!-- <script type="module" src="/login.js"></script> -->
 </head>
 
 <body>
-    <script >
-        document.addEventListener('DOMContentLoaded', () => {
-    const veriListesi = document.getElementById('veriListesi');
-    fetch('http://127.0.0.1:8000/api/data/')
-        .then(response => response.json())
-        .then(data => {
-            data.forEach(veri => {
-                const listItem = document.createElement('li');
-                listItem.textContent = `${veri.id}: ${veri.fname}`;
-                veriListesi.appendChild(listItem);
+    {% csrf_token %}
+    <div id="htmlContent">
+    </div>
+    <script>
+        $(document).ready(function(e){
+            // e.preventDefault();
+        //     $.ajax({
+        //         type:'GET',
+        //         url:'user/api/data',
+        //         data: {
+        //             fname:$('#a').val(),
+        //             // csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+        //         },
+        //     success: function(data) {
+        //         $('h2').html(data);
+        //         console.log(data);
+        //     }
+        //     })
+
+
+        // HTML alma 
+        $.ajax({
+                url: 'http://127.0.0.1:8000/user/api/data', // Dosyanın URL'si
+                method: 'GET',
+                dataType: 'html',
+                success: function(response) {
+                    $('#htmlContent').html(response); // Alınan HTML'i sayfaya ekle
+                    console.log(response)
+                },
+                error: function(xhr, status, error) {
+                    console.error('Hata:', error);
+                }
             });
         })
-        .catch(error => {
-            console.error('Hata:', error);
-        });
-});
+
     </script>
-    <ul id="veriListesi">
-        <!-- Veriler burada listelenecek -->
-    </ul>
 </body>

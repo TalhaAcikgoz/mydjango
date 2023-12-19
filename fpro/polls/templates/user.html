@@ -1,44 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <meta charset="UTF-8">
-    <title>THIS IS USER PROFILE PAGE</title>
-</head>
-
-<body>
-    <div>
-        <h1>Create pepo</h1>
-        <h2></h2>
-        <form id="post-form">
-            {% csrf_token %}
-            <p>fname</p>
-            <input type="text" id="fname" name="fame" />
-            <p>lname</p>
-            <input type="text" id="lname" name="lame" />
-            <input type="submit" />
-        </form>
-        <!-- my user name is {{ user }} -->
-    </div>
-</body>
-
-<script type="text/javascript">
-    $(document).on('submit', '#post-form', function(e){
-        e.preventDefault();
-        $.ajax({
-            type:'GET',
-            url:'api/data',
-            data: {
-                fname:$('#fname').val(),
-                lname:$('#lname').val(),
-                // csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
-            },
-            success: function(data) {
-                $('h2').html(data);
-                // $('h2').text(data[0].fname);
-                // console.log(data[0].fname);
-                console.log(data);
-            }
-        })
-    })
-</script>
+<form id="post-form">
+    <p>fname</p>
+    <input type="text" id="fname" name="fname" />
+    <p>lname</p>
+    <input type="text" id="lname" name="lame" />
+    <input type="submit" />
+</form>

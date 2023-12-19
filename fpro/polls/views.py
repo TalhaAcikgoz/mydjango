@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from .models import myModel
 from .serializers import myModelSerializers
 from django.template import Context, loader
+import os
 
 new_instance1 = myModel(fname='talha', lname='acikgoz')
 new_instance2 = myModel(fname='omer', lname='acikgoz')
@@ -28,13 +29,6 @@ class data(object):
     def __init__(self, name) -> None:
         self.name = name
 
-def get_data(request):
-    template = loader.get_template("my.html")
-    # if request.method == 'POST':
-    #     print('ulee')
-    # data = list(myModel.objects.values())  # Tüm verileri alıyoruz
-    # return JsonResponse(data, safe=False)
-    return HttpResponse(template.render())
 
 # def get_datas(request):
 #     # with open('.\\templates\my.html', 'r') as file:
@@ -56,8 +50,18 @@ def create(request):
         succes = 'User '+ fname + ' create succesfully'
         return HttpResponse(succes)
 
+def getHtmlFileToEndpoint(fileName: str):
+    template = loader.get_template('user.html')
+    return HttpResponse(template.render())
+
 def userpage(request):
     return render(request, "user.html")
 
 def login(request):
+    getHtmlFileToEndpoint('user.html')
+    if request.method == 'POST':
+        fname = request.POST['fname']
+        lname = request.POST['lname']
+        new_porfile = myModel(fname=fname, lname=lname)
+        new_porfile.save()
     return render(request, 'login.html')

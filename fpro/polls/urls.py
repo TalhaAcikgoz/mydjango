@@ -7,8 +7,8 @@ from . import views
 
 urlpatterns = [
     path("", login, name="login"),
-    path('create', views.create, name='create'),
+    path('create', views.getHtmlFileToEndpoint, name='create'),
     path("user/", userpage, name='userpage'),
-    path("user/api/data/", get_data, name='get-data')
+    path("user/api/data/", getHtmlFileToEndpoint, name='get-data')
     # path("api/", myModelListCreateView.as_view(), name="myModel"),
 ]
