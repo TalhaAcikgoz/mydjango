@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    I hope json showing
+    <meta charset="UTF-8">
+    <title>JSON Verileri Gösterme</title>
+</head>
+
+<body>
+    <script >
+        document.addEventListener('DOMContentLoaded', () => {
+    const veriListesi = document.getElementById('veriListesi');
+    fetch('http://127.0.0.1:8000/api/data/')
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(veri => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${veri.id}: ${veri.fname}`;
+                veriListesi.appendChild(listItem);
+            });
+        })
+        .catch(error => {
+            console.error('Hata:', error);
+        });
+});
+    </script>
+    <ul id="veriListesi">
+        <!-- Veriler burada listelenecek -->
+    </ul>
+</body>
